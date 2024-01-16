@@ -600,7 +600,7 @@ void foldPaperArray(PaperArray* p, int dir, int dist) {//dir is direction UP, UP
                         flag = 1;
                     }
                     else if (p->map[4 + w - z][0 + w] == 4) {
-                    
+
                         p->map[4 + w - z][0 + w] = 0;
 
                         p->map[4 + w - z - 1][0 + z + 1] = 2;
@@ -612,6 +612,7 @@ void foldPaperArray(PaperArray* p, int dir, int dist) {//dir is direction UP, UP
                         p->map[4 + w - z][0 + w] = 0;
                         p->map[4 + w - z - 1][0 + z + 1] = 2;
                     }
+
                 }
             }
             if (flag) break;
