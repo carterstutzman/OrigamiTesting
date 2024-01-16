@@ -589,7 +589,7 @@ void foldPaperArray(PaperArray* p, int dir, int dist) {//dir is direction UP, UP
         }
     }
     if (dir == 5) {//Lower Left ( Start at [4][0] negative y, positive x //working except for  weird buffer overshoot
-
+        //
         for (int z = 0; z < 5; z++) {
             for (int w = 0; w <= z; w++) {
                 //printf("Y: %i    X: %i\n", 4 - w, 0 + z + w);
