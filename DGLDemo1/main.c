@@ -63,7 +63,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
     PaperArray* p = createPaperArray(DGL_Graphics_LoadTexture("./Assets/Paper/paper2.png"), DGL_Graphics_LoadTexture("./Assets/Paper/paper1.png"));
 
     //room testing
-    DGL_Texture* tex0 = DGL_Graphics_LoadTexture("./Assets/Paper/wall1.png");
+    DGL_Texture* tex0 = DGL_Graphics_LoadTexture("./Assets/Layers/00.png");
     DGL_Texture* tex1 = DGL_Graphics_LoadTexture("./Assets/Paper/wall2.png");
     DGL_Texture* tex2 = DGL_Graphics_LoadTexture("./Assets/Paper/wall3.png");
     DGL_Texture* tex3 = DGL_Graphics_LoadTexture("./Assets/Paper/paper4.png");

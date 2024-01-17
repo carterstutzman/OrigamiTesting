@@ -58,10 +58,10 @@ void drawRoom(Room* r) {
 
 	//draw front
 	DGL_Mat4 matrix = {
-		r->width * (c),     0.0f,       0.0f,     (-s * (r->width / 2.0f)),
+		r->width * (c) * 2.0f,     0.0f,       0.0f,     (-s * (r->width / 1.0f)),
 		0.0f,       r->height,     0.0f,     0.0f,
 		0.0f,       0.0f,       0.0f,     0.0f,
-		(1.0f * st) * ct,       0.0f,       0.0f,     1.0f,
+		(2.0f * st) * ct,       0.0f,       0.0f,     1.0f,
 	};
 
 	DGL_Graphics_SetCB_TransformMatrix(&matrix);
@@ -75,10 +75,10 @@ void drawRoom(Room* r) {
 	s = sinf(( - 90 + r->angle) * (PI / 180.0f));
 
 	matrix = (DGL_Mat4){
-		r->width * (c),     0.0f,       0.0f,     (-s * (r->width / 2.0f)),
+		r->width * (c) * 2.0f,     0.0f,       0.0f,     (-s * (r->width / 1.0f)),
 		0.0f,       r->height,     0.0f,     0.0f,
 		0.0f,       0.0f,       0.0f,     0.0f,
-		(-1.0f * st) * ct,       0.0f,       0.0f,     1.0f,
+		(-2.0f * st) * ct,       0.0f,       0.0f,     1.0f,
 	};
 
 
@@ -92,10 +92,10 @@ void drawRoom(Room* r) {
 	c = cosf((-180 + r->angle) * (PI / 180.0f));
 	s = sinf((-180 + r->angle) * (PI / 180.0f));
 	matrix = (DGL_Mat4){
-		r->width* (c),     0.0f,       0.0f,     (-s * (r->width / 2.0f)),
+		r->width* (c) * 2.0f,     0.0f,       0.0f,     (-s * (r->width / 1.0f)),
 		0.0f,       r->height,     0.0f,     0.0f,
 		0.0f,       0.0f,       0.0f,     0.0f,
-		(1.0f * st) * ct,       0.0f,       0.0f,     1.0f,
+		(2.0f * st) * ct,       0.0f,       0.0f,     1.0f,
 	};
 
 
@@ -107,10 +107,10 @@ void drawRoom(Room* r) {
 	c = cosf((-270 + r->angle) * (PI / 180.0f));
 	s = sinf((-270 + r->angle) * (PI / 180.0f));
 	matrix = (DGL_Mat4){
-		r->width* (c),     0.0f,       0.0f,     (-s * (r->width/2.0f)),
+		r->width* (c) * 2.0f,     0.0f,       0.0f,     (-s * (r->width/1.0f)),
 		0.0f,       r->height,     0.0f,     0.0f,
 		0.0f,       0.0f,       0.0f,     0.0f,
-		(-1.0f * st) * ct,       0.0f,       0.0f,     1.0f,
+		(-2.0f * st) * ct,       0.0f,       0.0f,     1.0f,
 	};
 
 
