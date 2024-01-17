@@ -14,6 +14,8 @@ typedef struct {
 
 	DGL_Mesh* mesh;
 
+	float depth;
+
 	float angle;
 	float dir;
 
@@ -24,7 +26,7 @@ typedef struct {
 
 
 
-Room* createRoom(DGL_Texture* front, DGL_Texture* right, DGL_Texture* rear, DGL_Texture* left, DGL_Texture* floor, DGL_Texture* ceiling);
+Room* createRoom(DGL_Texture* front, DGL_Texture* right, DGL_Texture* rear, DGL_Texture* left, DGL_Texture* floor, DGL_Texture* ceiling, float depth);
 void drawRoom(Room* r);
 void rotateRoom(Room* r, float angle);
 void stepRoom(Room* r);
