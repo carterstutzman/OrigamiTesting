@@ -40,7 +40,6 @@ DGL_Mesh* createRectMesh(float width, float height) {
 
 DGL_Mesh* createRectMeshOption(float width, float height, int option) {
     // Save the half width and height values
-
     float size = 1.0f / 1.0f;
     float halfHeight = height / 2.0f;
     // Tell DGL that we are starting a new mesh

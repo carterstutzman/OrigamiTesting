@@ -3,10 +3,7 @@
 #include <stdlib.h>
 #include <math.h>
 #define PI 3.141592f
-//so rooms are groups of 4 walls yeah?
-//basically layer these rooms like a tesseract yeah?
-//Understandable in the purest sense yeah?
-//Yeah? Yeah?! Yeah!
+
 
 Room* createRoom(DGL_Texture* front, DGL_Texture* right, DGL_Texture* rear, DGL_Texture* left, DGL_Texture* floor, DGL_Texture* ceiling) {
 	Room* r = (Room*)malloc(sizeof(Room));
@@ -20,11 +17,8 @@ Room* createRoom(DGL_Texture* front, DGL_Texture* right, DGL_Texture* rear, DGL_
 		r->t5 = floor;
 		r->t6 = ceiling;
 		r->mesh = createRectMesh(1.0f, 1.0f);
-
 		r->width = 1920.0f;
-		r->height = 1080.0f;
-
-		
+		r->height = 1080.0f/2.0f;
 	}
 	return r;
 }

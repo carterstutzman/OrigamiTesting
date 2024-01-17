@@ -90,7 +90,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
     Room* r = createRoom(tex0, tex0, tex0, tex0, tex0, tex0);
     Room* r2 = createRoom(tex1, tex2, tex1, tex2, tex1, tex1);
 
-    r2->width *= 2.0f;
+    r2->width *= 5.0f;
     while (running)
     {
         DGL_System_FrameControl();

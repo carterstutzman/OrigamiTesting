@@ -210,33 +210,49 @@ void drawPaperArray(PaperArray* p, int angle) {
     
     //printf("%i\n", angle);
 
-    for (int y = 0; y < 5; y++) {
-        for (int x = 0; x < 5; x++) {
+    for (int y = 0; y < 4; y++) {
+        for (int x = 0; x < 4; x++) {
             if (p->map[y][x] != 0) {
 
                 if (angle == 0) {
                     pos = (DGL_Vec2){ (x - 2) * 128.0f, -(y - 2) * 128.0f };
+                    pos.x += 64.0f;
+                    pos.y -= 64.0f;
                 }
                 if (angle == 1) {//rotate left diagonal 45
                     pos = (DGL_Vec2){ (x - 2) * 90.0f + (y-2)*90.0f, (x - 2) * 90.0f - (y -2) * 90.0f,};
+                    pos.x += 90.0f;
+                    pos.y -= 0.0f;
                 }
                 if (angle == 2) {//fully rotated 90 degrees to the left}
                     pos = (DGL_Vec2){ (y - 2) * 128.0f, (x - 2) * 128.0f };
+                    pos.x += 64.0f;
+                    pos.y += 64.0f;
                 };
                 if (angle == 3) {
                     pos = (DGL_Vec2){ -(x - 2) * 90.0f + (y - 2) * 90.0f, (x - 2) * 90.0f + (y - 2) * 90.0f };
+                    pos.x += 0.0f;
+                    pos.y += 90.0f;
                 }
                 if (angle == 4) {
                     pos = (DGL_Vec2){ -(x - 2) * 128.0f, (y - 2) * 128.0f };
+                    pos.x -= 64.0f;
+                    pos.y += 64.0f;
                 }
                 if (angle == 5) {
                     pos = (DGL_Vec2){ -(x - 2) * 90.0f - (y - 2) * 90.0f, -(x - 2) * 90.0f + (y - 2) * 90.0f };
+                    pos.x -= 90.0f;
+                    pos.y += 0.0f;
                 }
                 if (angle == 6) {
                     pos = (DGL_Vec2){ -(y - 2) * 128.0f, -(x - 2) * 128.0f };
+                    pos.x -= 64.0f;
+                    pos.y -= 64.0f;
                 }
                 if (angle == 7) {
                     pos = (DGL_Vec2){ (x - 2) * 90.0f - (y - 2) * 90.0f, -(x - 2) * 90.0f - (y - 2) * 90.0f };
+                    pos.x += 0.0f;
+                    pos.y -= 90.0f;
                 }
                 DGL_Graphics_SetCB_TextureOffset(&(DGL_Vec2){ x*64.0f, y*64.0f });
                 DGL_Graphics_SetCB_TransformData(&pos, &scale, (45.0f * angle) * (PI/180.0f));
@@ -733,7 +749,7 @@ void resetPaperArray(PaperArray* p) {
     int num = 0;
     for (int y = 0; y < 5; y++) {
         for (int x = 0; x < 5; x++) {
-            p->map[y][x] = 1;
+            p->map[y][x] = (y != 4) && (x!=4);
             num++;
             if (num > 10) {
                 num = 0;
