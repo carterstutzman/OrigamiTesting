@@ -5,7 +5,7 @@
 #define PI 3.141592f
 
 
-Room* createRoom(DGL_Texture* front, DGL_Texture* right, DGL_Texture* rear, DGL_Texture* left, DGL_Texture* floor, DGL_Texture* ceiling) {
+Room* createRoom(DGL_Texture* front, DGL_Texture* right, DGL_Texture* rear, DGL_Texture* left, DGL_Texture* floor, DGL_Texture* ceiling, float depth) {
 	Room* r = (Room*)malloc(sizeof(Room));
 	if (r != NULL) {
 		r->angle = 0.0f;
@@ -16,9 +16,10 @@ Room* createRoom(DGL_Texture* front, DGL_Texture* right, DGL_Texture* rear, DGL_
 		r->t4 = left;
 		r->t5 = floor;
 		r->t6 = ceiling;
+		r->depth = depth;
 		r->mesh = createRectMesh(1.0f, 1.0f);
-		r->width = 1920.0f;
-		r->height = 1080.0f/2.0f;
+		r->width = DGL_Window_GetMonitorSize().x * depth;
+		r->height = (DGL_Window_GetMonitorSize().y/2);
 	}
 	return r;
 }
@@ -44,7 +45,7 @@ void stepRoom(Room* r) {
 	}
 }
 
-
+DGL_Mat4 wallMatrix(float c, float s, float ct, float st, float w, float h, int negative);
 void drawRoom(Room* r) {
 	DGL_Graphics_SetShaderMode(DGL_PSM_TEXTURE, DGL_VSM_DEFAULT);
 	float c = cosf(r->angle * (PI / 180.0f));
@@ -57,12 +58,7 @@ void drawRoom(Room* r) {
 
 
 	//draw front
-	DGL_Mat4 matrix = {
-		r->width * (c),     0.0f,       0.0f,     (-s * (r->width / 2.0f)),
-		0.0f,       r->height,     0.0f,     0.0f,
-		0.0f,       0.0f,       0.0f,     0.0f,
-		(1.0f * st) * ct,       0.0f,       0.0f,     1.0f,
-	};
+	DGL_Mat4 matrix = wallMatrix(c, s, ct, st, r->width, r->height, -1);
 
 	DGL_Graphics_SetCB_TransformMatrix(&matrix);
 	DGL_Graphics_SetTexture(r->t1);
@@ -74,13 +70,8 @@ void drawRoom(Room* r) {
 	c = cosf(( - 90 + r->angle) * (PI / 180.0f));
 	s = sinf(( - 90 + r->angle) * (PI / 180.0f));
 
-	matrix = (DGL_Mat4){
-		r->width * (c),     0.0f,       0.0f,     (-s * (r->width / 2.0f)),
-		0.0f,       r->height,     0.0f,     0.0f,
-		0.0f,       0.0f,       0.0f,     0.0f,
-		(-1.0f * st) * ct,       0.0f,       0.0f,     1.0f,
-	};
-
+	matrix = wallMatrix(c, s, ct, st, r->width, r->height, 1);
+		
 
 	DGL_Graphics_SetCB_TransformMatrix(&matrix);
 	DGL_Graphics_SetTexture(r->t2);
@@ -91,12 +82,7 @@ void drawRoom(Room* r) {
 	//draw the rear wall
 	c = cosf((-180 + r->angle) * (PI / 180.0f));
 	s = sinf((-180 + r->angle) * (PI / 180.0f));
-	matrix = (DGL_Mat4){
-		r->width* (c),     0.0f,       0.0f,     (-s * (r->width / 2.0f)),
-		0.0f,       r->height,     0.0f,     0.0f,
-		0.0f,       0.0f,       0.0f,     0.0f,
-		(1.0f * st) * ct,       0.0f,       0.0f,     1.0f,
-	};
+	matrix = wallMatrix(c, s, ct, st, r->width, r->height, -1);
 
 
 	DGL_Graphics_SetCB_TransformMatrix(&matrix);
@@ -106,12 +92,7 @@ void drawRoom(Room* r) {
 	//draw the left wall;
 	c = cosf((-270 + r->angle) * (PI / 180.0f));
 	s = sinf((-270 + r->angle) * (PI / 180.0f));
-	matrix = (DGL_Mat4){
-		r->width* (c),     0.0f,       0.0f,     (-s * (r->width/2.0f)),
-		0.0f,       r->height,     0.0f,     0.0f,
-		0.0f,       0.0f,       0.0f,     0.0f,
-		(-1.0f * st) * ct,       0.0f,       0.0f,     1.0f,
-	};
+	matrix = wallMatrix(c, s, ct, st, r->width, r->height, 1);
 
 
 	DGL_Graphics_SetCB_TransformMatrix(&matrix);
@@ -120,7 +101,18 @@ void drawRoom(Room* r) {
 }
 
 
+DGL_Mat4 wallMatrix(float c, float s, float ct, float st, float w, float h, int negative)
+{
+	DGL_Mat4 value = 
+	{
+		w * (c) * 1.0f,     0.0f,       0.0f,     (s * (w / 2.0f)),
+		0.0f,       h,     0.0f,     0.0f,
+		0.0f,       0.0f,       0.0f,     0.0f,
+		((float)negative * 3.0f * st) * ct,       0.0f,       0.0f,     1.0f, 
+	};
 
+	return value;
+}
 
 
 

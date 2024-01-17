@@ -13,6 +13,8 @@
 #include "cube.h"
 
 
+int speed = 2;
+
 
 LRESULT CALLBACK WndProc(_In_ HWND hWnd, _In_ UINT message, _In_ WPARAM wParam, _In_ LPARAM lParam)
 {
@@ -70,8 +72,8 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 
     TextureList* list = loadTextureList(0, 1);
 
-    Room* r = createRoom(tex0, tex0, tex0, tex0, tex0, tex0);
-    Room* r2 = createRoom(tex1, tex2, tex1, tex2, tex1, tex1);
+    Room* r = createRoom(tex0, tex0, tex0, tex0, tex0, tex0, 1.0f);
+    Room* r2 = createRoom(tex1, tex2, tex1, tex2, tex1, tex1, 1.5f);
     r2->width *= 1.0f;
 
     Block* block = createBlock((DGL_Vec2) { 128.0f, 128.0f }, 0.5f, list->textures[0]);
@@ -143,18 +145,18 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
         if (test == 2) {
             drawTilemap(MAP, pos, offx, offy, block, list);
             DGL_Graphics_FinishDrawing();
-            if (DGL_Input_KeyDown(VK_LEFT)) {
-                pos.x--;
+            if (DGL_Input_KeyDown('A')) {
+                pos.x -= speed;
             }
-            if (DGL_Input_KeyDown(VK_RIGHT)) {
-                pos.x++;
+            if (DGL_Input_KeyDown('D')) {
+                pos.x += speed;
             }
 
-            if (DGL_Input_KeyDown(VK_UP)) {
-                pos.y--;
+            if (DGL_Input_KeyDown('W')) {
+                pos.y -= speed;
             }
-            if (DGL_Input_KeyDown(VK_DOWN)) {
-                pos.y++;
+            if (DGL_Input_KeyDown('S')) {
+                pos.y += speed;
             }
 
             offx = 0 + (int)(pos.x / 128.0f) * 1;
@@ -166,15 +168,15 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
             drawRoom(r2);
             drawRoom(r);
             DGL_Graphics_FinishDrawing();
-            if (DGL_Input_KeyTriggered(VK_RIGHT)) {
+            if (DGL_Input_KeyTriggered('D')) {
                 //rotateRoom(r, 30.0f / 60.0f);
                 r->dir = 1.0f;
-                r2->dir = 0.95f;
+                r2->dir = 1.0f;
             }
-            if (DGL_Input_KeyTriggered(VK_LEFT)) {
+            if (DGL_Input_KeyTriggered('A')) {
                 //rotateRoom(r, -30.0f / 60.0f);
                 r->dir = -1.0f;
-                r2->dir = -0.95f;
+                r2->dir = -1.0f;
             }
             if (DGL_Input_KeyTriggered(VK_SPACE)) {
                 printf("%f\n", r->angle);
@@ -202,16 +204,16 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
             drawPaperArray(p, angle);
 
             DGL_Graphics_FinishDrawing();
-            if (DGL_Input_KeyTriggered(VK_DOWN)) {
+            if (DGL_Input_KeyTriggered('S')) {
                 foldPaperArray(p, angle, 0);
                 times++;
                 
             }
             
-            if (DGL_Input_KeyTriggered(VK_LEFT)) {
+            if (DGL_Input_KeyTriggered('A')) {
                 angle++;
             }
-            if (DGL_Input_KeyTriggered(VK_RIGHT)) {
+            if (DGL_Input_KeyTriggered('D')) {
                 angle--;
             }
             if (angle > 7) angle = 0;

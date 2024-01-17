@@ -277,6 +277,8 @@ void drawTilemap(char tilemap[][49], DGL_Vec2 off, int index, int index2, Block*
 	//		DGL_Graphics_SetCB_Alpha(1.0f);
 	//	}
 	//}
+	off.x = 0;
+	off.y = 0;
 
 }
 
