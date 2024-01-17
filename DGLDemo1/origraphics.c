@@ -82,101 +82,101 @@ DGL_Mesh* createTriMeshOption(float width, float height, int option) {
 }
 
 
-Triangle* createTriangle(int angle, DGL_Texture* topTex, DGL_Texture* botTex) {
-    Triangle* t = (Triangle*)(malloc(sizeof(Triangle)));
-    if (t) {
-        t->angle = angle;
-        t->stretchDiagonal = 1.0f;
-        t->stretchVertical = 0.0f;
-        t->stretchHorizontal = 1.0f;
+//Triangle* createTriangle(int angle, DGL_Texture* topTex, DGL_Texture* botTex) {
+//    Triangle* t = (Triangle*)(malloc(sizeof(Triangle)));
+//    if (t) {
+//        t->angle = angle;
+//        t->stretchDiagonal = 1.0f;
+//        t->stretchVertical = 0.0f;
+//        t->stretchHorizontal = 1.0f;
+//
+//        t->mesh = createTriMesh(640.0f, 640.0f);
+//        t->topTex = topTex;
+//        t->botTex = botTex;
+//
+//
+//    }
+//    return t;
+//}
+//void drawTriangle(Triangle* t, int x, int y, int angle, int bias, float shadow) {
+//    //float c = cosf((t->angle * 45.0f) * (PI / 180.0f));
+//    //float s = sinf((t->angle * 45.0f) * (PI / 180.0f));
+//    
+//    DGL_Vec2 pos = { (float)x, (float)y };
+//    DGL_Vec2 stretch = { 1.0f*bias,  1.0f* t->stretchDiagonal };
+//
+//    DGL_Color col = { 0.0f, 0.0f, 0.0f, shadow};
+//    //DGL_Graphics_
+//    //DGL_Graphics_SetShaderMode(DGL_PSM_COLOR, DGL_VSM_DEFAULT);
+//    
+//    DGL_Graphics_SetShaderMode(DGL_PSM_TEXTURE, DGL_VSM_DEFAULT);
+//    if (t->stretchDiagonal > 0) DGL_Graphics_SetTexture(t->topTex);
+//    else DGL_Graphics_SetTexture(t->botTex);
+//
+//    DGL_Graphics_SetCB_TransformData(&pos, &stretch, (angle * 45.0f) * (PI/180.0f));
+//    //DGL_Graphics_SetCB_TintColor(&col);
+//    DGL_Graphics_SetCB_Alpha(1.0f);
+//    if (shadow != 1.0f) {
+//        DGL_Graphics_SetCB_Alpha(0.875f+(shadow + 1.0f) / 16.0f);
+//    }
+//
+//    DGL_Graphics_DrawMesh(t->mesh, DGL_DM_TRIANGLELIST);
+//}
+//
+//SmallSquare* createSmallSquare(DGL_Texture* t1, DGL_Texture* t2, int angle) {
+//    SmallSquare* s = (SmallSquare*)(malloc(sizeof(SmallSquare)));
+//    if (s) {
+//        s->t1 = createTriangle(0, t1, t2);
+//        s->t2 = createTriangle(4, t1, t2);
+//        s->angle = angle;
+//
+//        s->isFlipping = 0;
+//        s->flipSpeed = 0.0f;
+//        s->isFlipped = 0;
+//    }
+//    return s;
+//}
+//void drawSmallSquare(SmallSquare* s, float x, float y) {
+//    //sorts by depth (which to draw on top)
+//    if (s->t2->stretchDiagonal < 0) {
+//        drawTriangle(s->t1, (int)x, (int)y, s->angle + 0, 1.0f, 1.0f);
+//        drawTriangle(s->t2, (int)x, (int)y, s->angle + 4, -1.0f, s->t1->stretchDiagonal);
+//    }
+//    else {
+//        drawTriangle(s->t2, (int)x, (int)y, s->angle + 4, -1.0f, s->t1->stretchDiagonal);
+//        drawTriangle(s->t1, (int)x, (int)y, s->angle + 0, 1.0f, 1.0f);   
+//    }
+//}
+//void foldSmallSquare(SmallSquare* s, int which, float much) {
+//    s->isFlipping = 1;
+//    if (s->isFlipped == 0) {
+//        s->flipSpeed = much;
+//    }
+//    if (s->isFlipped == 1) {
+//        s->flipSpeed = -much;
+//    }
+//
+//}
 
-        t->mesh = createTriMesh(640.0f, 640.0f);
-        t->topTex = topTex;
-        t->botTex = botTex;
-
-
-    }
-    return t;
-}
-void drawTriangle(Triangle* t, int x, int y, int angle, int bias, float shadow) {
-    //float c = cosf((t->angle * 45.0f) * (PI / 180.0f));
-    //float s = sinf((t->angle * 45.0f) * (PI / 180.0f));
-    
-    DGL_Vec2 pos = { x, y };
-    DGL_Vec2 stretch = { 1.0f*bias,  1.0f* t->stretchDiagonal };
-
-    DGL_Color col = { 0.0f, 0.0f, 0.0f, shadow};
-    //DGL_Graphics_
-    //DGL_Graphics_SetShaderMode(DGL_PSM_COLOR, DGL_VSM_DEFAULT);
-    
-    DGL_Graphics_SetShaderMode(DGL_PSM_TEXTURE, DGL_VSM_DEFAULT);
-    if (t->stretchDiagonal > 0) DGL_Graphics_SetTexture(t->topTex);
-    else DGL_Graphics_SetTexture(t->botTex);
-
-    DGL_Graphics_SetCB_TransformData(&pos, &stretch, (angle * 45.0f) * (PI/180.0f));
-    //DGL_Graphics_SetCB_TintColor(&col);
-    DGL_Graphics_SetCB_Alpha(1.0f);
-    if (shadow != 1.0f) {
-        DGL_Graphics_SetCB_Alpha(0.875f+(shadow + 1.0f) / 16.0f);
-    }
-
-    DGL_Graphics_DrawMesh(t->mesh, DGL_DM_TRIANGLELIST);
-}
-
-SmallSquare* createSmallSquare(DGL_Texture* t1, DGL_Texture* t2, int angle) {
-    SmallSquare* s = (SmallSquare*)(malloc(sizeof(SmallSquare)));
-    if (s) {
-        s->t1 = createTriangle(0, t1, t2);
-        s->t2 = createTriangle(4, t1, t2);
-        s->angle = angle;
-
-        s->isFlipping = 0;
-        s->flipSpeed = 0.0f;
-        s->isFlipped = 0;
-    }
-    return s;
-}
-void drawSmallSquare(SmallSquare* s, float x, float y) {
-    //sorts by depth (which to draw on top)
-    if (s->t2->stretchDiagonal < 0) {
-        drawTriangle(s->t1, x, y, s->angle + 0, 1.0f, 1.0f);
-        drawTriangle(s->t2, x, y, s->angle + 4, -1.0f, s->t1->stretchDiagonal);
-    }
-    else {
-        drawTriangle(s->t2, x, y, s->angle + 4, -1.0f, s->t1->stretchDiagonal);
-        drawTriangle(s->t1, x, y, s->angle + 0, 1.0f, 1.0f);   
-    }
-}
-void foldSmallSquare(SmallSquare* s, int which, float much) {
-    s->isFlipping = 1;
-    if (s->isFlipped == 0) {
-        s->flipSpeed = much;
-    }
-    if (s->isFlipped == 1) {
-        s->flipSpeed = -much;
-    }
-
-}
-
-void stepSmallSquare(SmallSquare* s) {
-    if (s->isFlipping == 1) {
-        s->t1->stretchDiagonal += s->flipSpeed * (0.1f + fabsf(s->t1->stretchDiagonal - 1.0f));
-        if (s->t1->stretchDiagonal > 1.0f) {
-            s->t1->stretchDiagonal = 1.0f;
-            s->isFlipping = 0;
-            s->flipSpeed = 0.0f;
-            s->isFlipped = 0;
-
-        }
-        if (s->t1->stretchDiagonal < -1.0f) {
-            s->t1->stretchDiagonal = -1.0f;
-            s->isFlipping = 0;
-            s->flipSpeed = 0.0f;
-            s->isFlipped = 1;
-
-        }
-    }
-}
+//void stepSmallSquare(SmallSquare* s) {
+//    if (s->isFlipping == 1) {
+//        s->t1->stretchDiagonal += s->flipSpeed * (0.1f + fabsf(s->t1->stretchDiagonal - 1.0f));
+//        if (s->t1->stretchDiagonal > 1.0f) {
+//            s->t1->stretchDiagonal = 1.0f;
+//            s->isFlipping = 0;
+//            s->flipSpeed = 0.0f;
+//            s->isFlipped = 0;
+//
+//        }
+//        if (s->t1->stretchDiagonal < -1.0f) {
+//            s->t1->stretchDiagonal = -1.0f;
+//            s->isFlipping = 0;
+//            s->flipSpeed = 0.0f;
+//            s->isFlipped = 1;
+//
+//        }
+//    }
+//}
 
 
 

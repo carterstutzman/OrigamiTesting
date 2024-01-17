@@ -72,7 +72,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 
     TextureList* list = loadTextureList(0, 1);
 
-    Room* r = createRoom(tex0, tex0, tex0, tex0, tex0, tex0, 1.0f);
+    Room* r = createRoom(tex0, tex3, tex3, tex3, tex3, tex3, 1.0f);
     Room* r2 = createRoom(tex1, tex2, tex1, tex2, tex1, tex1, 1.5f);
     r2->width *= 1.0f;
 
@@ -165,6 +165,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
         }
 
         if (test == 1) {
+            DGL_Graphics_SetCB_TextureOffset(&(DGL_Vec2) { 0.0f, 0.0f });
             drawRoom(r2);
             drawRoom(r);
             DGL_Graphics_FinishDrawing();
