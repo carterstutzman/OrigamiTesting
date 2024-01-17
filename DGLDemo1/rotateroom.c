@@ -19,7 +19,7 @@ Room* createRoom(DGL_Texture* front, DGL_Texture* right, DGL_Texture* rear, DGL_
 		r->depth = depth;
 		r->mesh = createRectMesh(1.0f, 1.0f);
 		r->width = DGL_Window_GetMonitorSize().x * depth;
-		r->height = (DGL_Window_GetMonitorSize().y/2);
+		r->height = (DGL_Window_GetMonitorSize().y/1.0f);
 	}
 	return r;
 }

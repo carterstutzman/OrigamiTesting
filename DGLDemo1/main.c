@@ -66,14 +66,18 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 
     //room testing
     DGL_Texture* tex0 = DGL_Graphics_LoadTexture("./Assets/Layers/00.png");
-    DGL_Texture* tex1 = DGL_Graphics_LoadTexture("./Assets/Paper/wall2.png");
+    DGL_Texture* tex1 = DGL_Graphics_LoadTexture("./Assets/Layers/frame.png");
+
     DGL_Texture* tex2 = DGL_Graphics_LoadTexture("./Assets/Paper/wall3.png");
     DGL_Texture* tex3 = DGL_Graphics_LoadTexture("./Assets/Paper/paper4.png");
 
     TextureList* list = loadTextureList(0, 1);
 
-    Room* r = createRoom(tex0, tex3, tex3, tex3, tex3, tex3, 1.0f);
-    Room* r2 = createRoom(tex1, tex2, tex1, tex2, tex1, tex1, 1.5f);
+    Room* r = createRoom(tex1, tex1, tex1, tex1, tex1, tex1, 1.0f);
+
+    Room* r2 = createRoom(tex0, tex0, tex0, tex0, tex0, tex0, 1.5f);
+
+
     r2->width *= 1.0f;
 
     Block* block = createBlock((DGL_Vec2) { 128.0f, 128.0f }, 0.5f, list->textures[0]);
