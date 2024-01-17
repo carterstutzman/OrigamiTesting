@@ -195,11 +195,7 @@ PaperArray* createPaperArray(DGL_Texture* t1, DGL_Texture* t2) {
         p->downRight = createTriMeshOption(128.0f, 128.0f, 3);
 
 
-        for (int a = 0; a < 5; a++) {
-            for (int b = 0; b < 5; b++) {
-                p->map[a][b] = 1;
-            }
-        }
+        resetPaperArray(p);
     }
     return p;
 }

@@ -36,9 +36,10 @@ void rotateRoom(Room* r, float angle) {
 void stepRoom(Room* r) {
 	if (r->dir != 0) {
 		rotateRoom(r, r->dir*1.0f);
-		if ((int)r->angle % 90 == 0) {
-			printf("%f\n", r->angle);
+		if ((int)roundf(r->angle) % 90 == 0) {
+			//printf("%f\n", r->angle);
 			r->dir = 0;
+			r->angle = roundf(r->angle);
 		}
 	}
 }

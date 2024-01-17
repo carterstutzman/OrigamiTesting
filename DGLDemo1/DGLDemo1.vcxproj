@@ -159,6 +159,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="cube.h" />
     <ClInclude Include="engine.h" />
     <ClInclude Include="graphicsutils.h" />
     <ClInclude Include="origraphics.h" />
@@ -167,6 +168,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="cube.c" />
     <ClCompile Include="engine.c" />
     <ClCompile Include="graphicsutils.c" />
     <ClCompile Include="main.c" />
